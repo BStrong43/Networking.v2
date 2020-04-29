@@ -10,7 +10,7 @@ public class NetInit : MonoBehaviour
     public InputField IP_input;
     public InputField PortInput;
     public InputField UserName;
-    public GameObject Mode;
+    //public GameObject Mode;
     public bool isServer = false;
     private static NetInit instance; //Singleton makes for a simpleton
     public static NetInit Instance
@@ -26,7 +26,6 @@ public class NetInit : MonoBehaviour
             return;
         }
         instance = this;
-        //Mode.GetComponent<Dropdown>().value = 1;
 
     }
 
@@ -46,12 +45,11 @@ public class NetInit : MonoBehaviour
 
         if (isServer)
         {
-
-            NetworkManager.Instance.initServer(int.Parse(PortInput.text), UserName.text, (NetworkManager.netMode)Mode.GetComponent<Dropdown>().value);
+            NetworkManager.Instance.initServer(int.Parse(PortInput.text), UserName.text, 0);
         }
         else
         {
-            NetworkManager.Instance.initClient(IP_input.text, int.Parse(PortInput.text), UserName.text, (NetworkManager.netMode)Mode.GetComponent<Dropdown>().value);
+            NetworkManager.Instance.initClient(IP_input.text, int.Parse(PortInput.text), UserName.text, 0);
         }
         SceneManager.LoadScene("game");
     }
